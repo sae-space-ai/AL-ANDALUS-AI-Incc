@@ -1,0 +1,42 @@
+@import "tailwindcss";
+@import "../packages/branding/styles/andalucia-theme.css";
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    font-family: var(--andalusia-font-sans, 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: var(--andalusia-bg, #F5F8F5);
+    color: var(--andalusia-text, #15241B);
+  }
+}
+
+@layer utilities {
+  .andalusia-surface {
+    background-color: var(--andalusia-surface);
+    border-color: var(--andalusia-border);
+  }
+  
+  .andalusia-card {
+    background-color: var(--andalusia-surface);
+    border: 1px solid var(--andalusia-border);
+    border-radius: var(--andalusia-radius-lg);
+    box-shadow: var(--andalusia-shadow-sm);
+  }
+  
+  .andalusia-text-primary {
+    color: var(--andalusia-green);
+  }
+  
+  .andalusia-text-secondary {
+    color: var(--andalusia-text-secondary);
+  }
+  
+  .andalusia-border {
+    border-color: var(--andalusia-border);
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "name": "AL-ANDALUS AI Branding",
+  "version": "1.0.0",
+  "description": "Sistema de identidad corporativa de AL-ANDALUS AI",
+  "brand": {
+    "name": "AL-ANDALUS AI",
+    "product": "ANDALUS RE",
+    "motto": "INTELLIGENCE · ENGINEERING · EUROPE",
+    "legal_status": "Empresa proyectada. EU Inc. pendiente de constitución legal."
+  },
+  "colors": {
+    "verde_andaluz": "#007A3D",
+    "blanco": "#FFFFFF",
+    "verde_profundo": "#073C27",
+    "fondo_claro": "#F5F8F5",
+    "gris_borde": "#D8E3DA",
+    "texto_oscuro": "#15241B"
+  },
+  "themes": {
+    "andalucia-light": {
+      "background": "#F5F8F5",
+      "surface": "#FFFFFF",
+      "primary": "#007A3D",
+      "text": "#15241B",
+      "border": "#D8E3DA"
+    },
+    "andalucia-dark": {
+      "background": "#073C27",
+      "surface": "#0A4D33",
+      "primary": "#007A3D",
+      "text": "#FFFFFF",
+      "border": "#1A5C42"
+    }
+  },
+  "anagram": {
+    "status": "BLOQUEADO",
+    "reason": "Archivo gráfico original no proporcionado por el propietario",
+    "expected_file": "AL_ANDALUS_AI_ANAGRAMA_APROBADO.png",
+    "search_paths": [
+      "assets/reference/",
+      "assets/",
+      "branding/",
+      "inputs/"
+    ],
+    "rule": "NO INVENTAR. NO SUSTITUIR. NO REDIBUJAR."
+  },
+  "integrity": {
+    "sha256_anagram": null,
+    "verified": false,
+    "last_check": "2026-10-15"
+  },
+  "usage_rules": [
+    "El anagrama original es obligatorio",
+    "No alterar píxeles, proporciones, nombre ni lema",
+    "Escalar proporcionalmente mediante CSS si es necesario",
+    "No generar variantes sin aprobación del propietario",
+    "Conservar atribuciones al proyecto REA original"
+  ]
+}

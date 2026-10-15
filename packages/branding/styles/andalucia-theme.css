@@ -1,0 +1,289 @@
+/* ============================================================
+   ANDALUCÍA THEME — Sistema de identidad visual de AL-ANDALUS AI
+   Tema claro y oscuro basado en la paleta andaluza
+   ============================================================ */
+
+/* Variables del tema claro (Andalucía Light) */
+:root,
+[data-theme="andalucia-light"] {
+  /* Colores principales */
+  --andalusia-green: #007A3D;
+  --andalusia-green-hover: #005C2E;
+  --andalusia-green-active: #004D26;
+  --andalusia-white: #FFFFFF;
+  --andalusia-deep-green: #073C27;
+  
+  /* Fondos */
+  --andalusia-bg: #F5F8F5;
+  --andalusia-surface: #FFFFFF;
+  --andalusia-surface-elevated: #FFFFFF;
+  
+  /* Texto */
+  --andalusia-text: #15241B;
+  --andalusia-text-secondary: #3D5A47;
+  --andalusia-text-tertiary: #5A7A66;
+  --andalusia-text-inverse: #FFFFFF;
+  
+  /* Bordes */
+  --andalusia-border: #D8E3DA;
+  --andalusia-border-strong: #B8C9BC;
+  
+  /* Sombras */
+  --andalusia-shadow-sm: 0 1px 2px rgba(7, 60, 39, 0.05);
+  --andalusia-shadow-md: 0 4px 6px rgba(7, 60, 39, 0.08);
+  --andalusia-shadow-lg: 0 10px 15px rgba(7, 60, 39, 0.12);
+  
+  /* Estados */
+  --andalusia-focus: rgba(0, 122, 61, 0.3);
+  --andalusia-success: #007A3D;
+  --andalusia-warning: #D97706;
+  --andalusia-error: #DC2626;
+  --andalusia-info: #0284C7;
+  
+  /* Tipografía */
+  --andalusia-font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --andalusia-font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  
+  /* Espaciado */
+  --andalusia-radius-sm: 4px;
+  --andalusia-radius-md: 8px;
+  --andalusia-radius-lg: 12px;
+  --andalusia-radius-xl: 16px;
+  
+  /* Transiciones */
+  --andalusia-transition: 200ms ease-in-out;
+}
+
+/* Variables del tema oscuro (Andalucía Dark) */
+[data-theme="andalucia-dark"] {
+  /* Colores principales */
+  --andalusia-green: #00A854;
+  --andalusia-green-hover: #00C963;
+  --andalusia-green-active: #00E070;
+  --andalusia-white: #FFFFFF;
+  --andalusia-deep-green: #0A4D33;
+  
+  /* Fondos */
+  --andalusia-bg: #073C27;
+  --andalusia-surface: #0A4D33;
+  --andalusia-surface-elevated: #0F5C3D;
+  
+  /* Texto */
+  --andalusia-text: #FFFFFF;
+  --andalusia-text-secondary: #D8E3DA;
+  --andalusia-text-tertiary: #B8C9BC;
+  --andalusia-text-inverse: #15241B;
+  
+  /* Bordes */
+  --andalusia-border: #1A5C42;
+  --andalusia-border-strong: #2A7C5A;
+  
+  /* Sombras */
+  --andalusia-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --andalusia-shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
+  --andalusia-shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.5);
+  
+  /* Estados */
+  --andalusia-focus: rgba(0, 168, 84, 0.4);
+  --andalusia-success: #00A854;
+  --andalusia-warning: #F59E0B;
+  --andalusia-error: #EF4444;
+  --andalusia-info: #38BDF8;
+}
+
+/* Soporte para prefers-color-scheme */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    /* Aplica variables del tema oscuro automáticamente */
+    --andalusia-green: #00A854;
+    --andalusia-green-hover: #00C963;
+    --andalusia-green-active: #00E070;
+    --andalusia-bg: #073C27;
+    --andalusia-surface: #0A4D33;
+    --andalusia-surface-elevated: #0F5C3D;
+    --andalusia-text: #FFFFFF;
+    --andalusia-text-secondary: #D8E3DA;
+    --andalusia-text-tertiary: #B8C9BC;
+    --andalusia-text-inverse: #15241B;
+    --andalusia-border: #1A5C42;
+    --andalusia-border-strong: #2A7C5A;
+    --andalusia-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+    --andalusia-shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
+    --andalusia-shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.5);
+    --andalusia-focus: rgba(0, 168, 84, 0.4);
+  }
+}
+
+/* ============================================================
+   ESTILOS BASE
+   ============================================================ */
+
+body {
+  background-color: var(--andalusia-bg);
+  color: var(--andalusia-text);
+  font-family: var(--andalusia-font-sans);
+  transition: background-color var(--andalusia-transition), color var(--andalusia-transition);
+}
+
+/* Enlaces */
+a {
+  color: var(--andalusia-green);
+  text-decoration: none;
+  transition: color var(--andalusia-transition);
+}
+
+a:hover {
+  color: var(--andalusia-green-hover);
+  text-decoration: underline;
+}
+
+a:focus-visible {
+  outline: 2px solid var(--andalusia-green);
+  outline-offset: 2px;
+  border-radius: var(--andalusia-radius-sm);
+}
+
+/* Botones */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.625rem 1.25rem;
+  font-weight: 500;
+  border-radius: var(--andalusia-radius-md);
+  transition: all var(--andalusia-transition);
+  cursor: pointer;
+  border: none;
+  font-size: 0.875rem;
+}
+
+.btn-primary {
+  background-color: var(--andalusia-green);
+  color: var(--andalusia-text-inverse);
+}
+
+.btn-primary:hover {
+  background-color: var(--andalusia-green-hover);
+}
+
+.btn-primary:active {
+  background-color: var(--andalusia-green-active);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--andalusia-green);
+  border: 1px solid var(--andalusia-green);
+}
+
+.btn-secondary:hover {
+  background-color: var(--andalusia-green);
+  color: var(--andalusia-text-inverse);
+}
+
+/* Tarjetas */
+.card {
+  background-color: var(--andalusia-surface);
+  border: 1px solid var(--andalusia-border);
+  border-radius: var(--andalusia-radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--andalusia-shadow-sm);
+  transition: all var(--andalusia-transition);
+}
+
+.card:hover {
+  box-shadow: var(--andalusia-shadow-md);
+  border-color: var(--andalusia-border-strong);
+}
+
+/* Formularios */
+input,
+textarea,
+select {
+  background-color: var(--andalusia-surface);
+  color: var(--andalusia-text);
+  border: 1px solid var(--andalusia-border);
+  border-radius: var(--andalusia-radius-md);
+  padding: 0.5rem 0.75rem;
+  font-family: var(--andalusia-font-sans);
+  transition: all var(--andalusia-transition);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--andalusia-green);
+  box-shadow: 0 0 0 3px var(--andalusia-focus);
+}
+
+/* Código */
+code {
+  background-color: var(--andalusia-surface-elevated);
+  color: var(--andalusia-green);
+  padding: 0.125rem 0.375rem;
+  border-radius: var(--andalusia-radius-sm);
+  font-family: var(--andalusia-font-mono);
+  font-size: 0.875em;
+}
+
+pre {
+  background-color: var(--andalusia-surface-elevated);
+  color: var(--andalusia-text);
+  padding: 1rem;
+  border-radius: var(--andalusia-radius-md);
+  overflow-x: auto;
+  border: 1px solid var(--andalusia-border);
+}
+
+pre code {
+  background-color: transparent;
+  padding: 0;
+  color: inherit;
+}
+
+/* Tablas */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--andalusia-surface);
+  border-radius: var(--andalusia-radius-md);
+  overflow: hidden;
+}
+
+th {
+  background-color: var(--andalusia-surface-elevated);
+  color: var(--andalusia-text);
+  font-weight: 600;
+  text-align: left;
+  padding: 0.75rem 1rem;
+  border-bottom: 2px solid var(--andalusia-border-strong);
+}
+
+td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--andalusia-border);
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+tr:hover {
+  background-color: var(--andalusia-bg);
+}
+
+/* Accesibilidad */
+:focus-visible {
+  outline: 2px solid var(--andalusia-green);
+  outline-offset: 2px;
+}
+
+/* Reducción de movimiento */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
