@@ -1,6 +1,6 @@
 # ESTADO DEL PROYECTO — AL-ANDALUS AI
 
-> Última actualización: FASE 1 — Auditoría de REA (PARCIALMENTE VERIFICADA).
+> Última actualización: FASE 2 — Identidad Corporativa (PARCIAL).
 > Fecha: 15 de octubre de 2026.
 
 ---
@@ -22,6 +22,22 @@
 - ✅ docs/REA_APIS_MCP.md — Catálogo de CLI, MCP y herramientas.
 - ✅ docs/REA_COMPATIBILIDAD.md — Compatibilidad por SO y dependencias.
 - ✅ docs/REA_PRESERVACION.md — Reglas y pruebas de preservación.
+
+### Sistema de Branding (FASE 2 ✅)
+- ✅ packages/branding/manifest.json — Manifiesto de identidad.
+- ✅ packages/branding/styles/andalucia-theme.css — Variables CSS del tema Andalucía.
+
+### Scripts de Construcción (FASE 2 ✅)
+- ✅ scripts/build-andalus-website.py — Constructor de web derivada.
+- ✅ scripts/verify-andalus-website.py — Verificador de integridad.
+
+### Documentación FASE 2 (✅)
+- ✅ docs/IDENTIDAD_CORPORATIVA.md — Sistema de marca completo.
+- ✅ docs/FASE2_IMPLEMENTACION.md — Implementación detallada.
+- ✅ docs/FASE2_PRESERVACION.md — Comparación de inventario.
+- ✅ docs/FASE2_PRUEBAS.md — Resultados de pruebas.
+- ✅ docs/FASE2_PENDIENTES.md — Bloqueos y decisiones.
+- ✅ docs/FASE2_PARIDAD.json — Contadores y diferencias.
 
 ### Web Corporativa (FASE 0 ✅)
 - ✅ Página web base de AL-ANDALUS AI (React + Vite + Tailwind CSS).
@@ -53,9 +69,22 @@
 - ✅ Diseño de arquitectura de integración.
 - ✅ Definición de reglas de preservación.
 
+### FASE 2
+- ✅ Sistema de branding corporativo creado.
+- ✅ Variables CSS del tema Andalucía (claro/oscuro).
+- ✅ Web corporativa React actualizada con tema dinámico.
+- ✅ Toggle de tema claro/oscuro con persistencia.
+- ✅ Soporte para prefers-color-scheme.
+- ✅ Accesibilidad WCAG AA.
+- ✅ Atribución clara y honesta a REA.
+- ✅ Scripts de construcción y verificación creados.
+- ✅ Documentación completa de la FASE 2.
+- ✅ Build verificado sin errores.
+- ✅ Espacio reservado para anagrama (sin inventar).
+
 ## ¿Qué está pendiente?
 
-### Crítico (FASE 1 — Completar)
+### Crítico (FASE 1 y 2 — Completar)
 - ⏳ Clonación local del repositorio REA (requiere terminal/git).
 - ⏳ Verificación del commit exacto localmente.
 - ⏳ Estado limpio del upstream verificado con git.
@@ -63,6 +92,9 @@
 - ⏳ Ejecución de pruebas básicas de REA.
 - ⏳ Inventario exacto de archivos (contando con `find`).
 - ⏳ Archivo gráfico del anagrama oficial (dependencia del propietario).
+- ⏳ Construcción de web derivada ANDALUS RE (requiere vendor/rea).
+- ⏳ Verificación de preservación de páginas originales.
+- ⏳ Localización de código JOULE original.
 
 ### Desarrollo
 - ⏳ Web corporativa completa con todas las secciones.

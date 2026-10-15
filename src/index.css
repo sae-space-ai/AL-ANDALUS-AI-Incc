@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "../packages/branding/styles/andalucia-theme.css";
 
 @layer base {
   html {
@@ -6,25 +7,36 @@
   }
   
   body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-family: var(--andalusia-font-sans, 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background-color: var(--andalusia-bg, #F5F8F5);
+    color: var(--andalusia-text, #15241B);
   }
 }
 
 @layer utilities {
-  .animate-fade-in {
-    animation: fadeIn 0.6s ease-out;
+  .andalusia-surface {
+    background-color: var(--andalusia-surface);
+    border-color: var(--andalusia-border);
   }
   
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  .andalusia-card {
+    background-color: var(--andalusia-surface);
+    border: 1px solid var(--andalusia-border);
+    border-radius: var(--andalusia-radius-lg);
+    box-shadow: var(--andalusia-shadow-sm);
+  }
+  
+  .andalusia-text-primary {
+    color: var(--andalusia-green);
+  }
+  
+  .andalusia-text-secondary {
+    color: var(--andalusia-text-secondary);
+  }
+  
+  .andalusia-border {
+    border-color: var(--andalusia-border);
   }
 }

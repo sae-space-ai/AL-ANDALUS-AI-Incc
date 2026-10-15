@@ -86,8 +86,37 @@
 
 ---
 
+### DEC-011: Paleta de Colores Andalucía
+- **Fecha:** FASE 2
+- **Decisión:** Se adopta la paleta de colores basada en la bandera de Andalucía.
+- **Colores:** Verde andaluz (#007A3D), Blanco (#FFFFFF), Verde profundo (#073C27), Fondo claro (#F5F8F5).
+- **Temas:** Andalucía Light y Andalucía Dark.
+- **Estado:** ✅ Aprobada e implementada.
+
+### DEC-012: No Inventar Anagrama
+- **Fecha:** FASE 2
+- **Decisión:** Si el archivo del anagrama no existe, NO se inventará otro.
+- **Regla:** Espacio reservado con aviso visible.
+- **Estado:** ✅ Aprobada y aplicada.
+
+### DEC-013: Atribución Honesta a REA
+- **Fecha:** FASE 2
+- **Decisión:** Se atribuirá claramente el motor REA al proyecto original.
+- **Regla:** No atribuir a AL-ANDALUS AI la autoría exclusiva de funciones de REA.
+- **Estado:** ✅ Aprobada e implementada.
+
+### DEC-014: Scripts de Construcción Reproducibles
+- **Fecha:** FASE 2
+- **Decisión:** Se crearán scripts Python para construir y verificar la web derivada.
+- **Scripts:** build-andalus-website.py, verify-andalus-website.py.
+- **Estado:** ✅ Aprobada e implementada.
+
+---
+
 ## Registro de Cambios
 
 | Fecha | Decisión | Cambio |
 |---|---|---|
 | FASE 0 | DEC-001 a DEC-007 | Creación inicial del registro |
+| FASE 1 | DEC-008 a DEC-010 | Auditoría de REA |
+| FASE 2 | DEC-011 a DEC-014 | Identidad corporativa |

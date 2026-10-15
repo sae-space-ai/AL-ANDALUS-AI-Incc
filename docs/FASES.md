@@ -31,12 +31,22 @@
 - [ ] ⚠️ Ejecutar pruebas de REA (BLOQUEADO — sin clonación).
 - [ ] ⚠️ Generar inventario exacto de archivos (BLOQUEADO — sin clonación).
 
-### FASE 2 — Identidad Corporativa Visual ⏳ PENDIENTE
-- [ ] Recibir archivo gráfico del anagrama oficial.
-- [ ] Definir paleta de colores exacta.
-- [ ] Tipografías corporativas.
-- [ ] Guía de estilo visual.
-- [ ] Aplicar identidad a todos los productos.
+### FASE 2 — Identidad Corporativa Visual ⚠️ PARCIAL
+- [x] Definir paleta de colores (Andalucía Light/Dark).
+- [x] Crear variables CSS del tema.
+- [x] Implementar toggle de tema claro/oscuro.
+- [x] Crear sistema de branding (manifest, estilos).
+- [x] Actualizar web corporativa con identidad.
+- [x] Crear scripts de construcción de web derivada.
+- [x] Crear scripts de verificación.
+- [x] Documentación completa de la FASE 2.
+- [x] Atribución honesta a REA.
+- [x] Accesibilidad WCAG AA.
+- [ ] ⚠️ Recibir archivo gráfico del anagrama oficial (BLOQUEADO).
+- [ ] ⚠️ Integrar anagrama en web corporativa (BLOQUEADO).
+- [ ] ⚠️ Clonar vendor/rea (BLOQUEADO — sin terminal).
+- [ ] ⚠️ Construir web derivada ANDALUS RE (BLOQUEADO — sin vendor/rea).
+- [ ] ⚠️ Verificar preservación de páginas originales (BLOQUEADO).
 
 ### FASE 3 — Web Corporativa Completa ⏳ PENDIENTE
 - [ ] Página de inicio con identidad completa.
@@ -91,9 +101,12 @@
 
 ## Estado Actual
 
-**Fase activa:** FASE 1 (PARCIALMENTE VERIFICADA)
-**Próxima acción:** Completar clonación local de REA cuando se disponga de terminal.
-**Bloqueo principal:** Entorno web sin terminal/git para clonar repositorio.
+**Fase activa:** FASE 2 (PARCIAL)
+**Próxima acción:** Proporcionar anagrama oficial y entorno con terminal.
+**Bloqueos principales:**
+1. Anagrama oficial no disponible
+2. Sin terminal/git para clonar vendor/rea
+3. Código JOULE no localizado
 
 ## Resumen de Avance
 
@@ -101,7 +114,7 @@
 |---|---|---|
 | 0 | ✅ Completada | 100% |
 | 1 | ⚠️ Parcial | ~70% (investigación web completa, clonación pendiente) |
-| 2 | ⏳ Pendiente | 0% |
+| 2 | ⚠️ Parcial | ~75% (branding, scripts, docs completos; anagrama y web derivada bloqueados) |
 | 3 | ⏳ Pendiente | 0% |
 | 4 | ⏳ Pendiente | 0% |
 | 5 | ⏳ Pendiente | 0% |
