@@ -76,6 +76,7 @@ Inspiración: el contrapunto musical de **Johann Sebastian Bach**.
 | 0 | Creación de memoria maestra y documentación | ✅ Completada |
 | 1 | Auditoría de REA | ⚠️ Parcialmente verificada |
 | 2 | Identidad corporativa y tema Andalucía | ⚠️ Parcial (anagrama bloqueado) |
+| 2.1 | Recuperación y desbloqueo | ⚠️ Parcial (5 archivos REA obtenidos) |
 | 2 | Identidad corporativa visual | ⏳ Pendiente |
 | 3 | Web corporativa completa | ⏳ Pendiente |
 | 4 | Consola empresarial | ⏳ Pendiente |
@@ -141,3 +142,24 @@ Inspiración: el contrapunto musical de **Johann Sebastian Bach**.
 - BLOQUEADO: Construcción de web derivada (sin vendor/rea).
 - Decisiones aprobadas: DEC-011 a DEC-014.
 - Pendiente: proporcionar anagrama y entorno con terminal.
+
+### Sesión 4 — FASE 2.1 (PARCIAL)
+- Verificación exhaustiva del entorno (capacidades y limitaciones).
+- Conservación de 24 archivos de fases anteriores sin modificaciones.
+- Obtención REAL de 5 archivos del repositorio REA vía web_fetch:
+  - vendor/rea/website/templates/header.html.tmpl
+  - vendor/rea/website/templates/footer.html.tmpl
+  - vendor/rea/website/README.md
+  - vendor/rea/website/public/index.html
+  - vendor/rea/website/public/assets/theme.js
+- Documentación de FASE 2.1: docs/FASE21_RECUPERACION.md
+- Identificación clara de bloqueos:
+  - 🔴 Anagrama oficial (archivo no proporcionado)
+  - 🟡 Repositorio REA completo (sin terminal/git)
+  - 🟡 Código JOULE (no localizado)
+- Procedimientos de desbloqueo definidos:
+  - Opción A: ZIP del repositorio
+  - Opción B: Migrar a entorno con terminal
+  - Opción C: Obtención incremental
+- Recomendación: Continuar en este entorno para web corporativa.
+  Migrar a Qwen Code con terminal para web derivada completa.

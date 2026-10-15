@@ -44,9 +44,20 @@
 - [x] Accesibilidad WCAG AA.
 - [ ] ⚠️ Recibir archivo gráfico del anagrama oficial (BLOQUEADO).
 - [ ] ⚠️ Integrar anagrama en web corporativa (BLOQUEADO).
-- [ ] ⚠️ Clonar vendor/rea (BLOQUEADO — sin terminal).
+- [ ] ⚠️ Clonar vendor/rea completo (BLOQUEADO — sin terminal).
 - [ ] ⚠️ Construir web derivada ANDALUS RE (BLOQUEADO — sin vendor/rea).
 - [ ] ⚠️ Verificar preservación de páginas originales (BLOQUEADO).
+
+### FASE 2.1 — Recuperación y Desbloqueo ⚠️ PARCIAL
+- [x] Verificar capacidades reales del entorno.
+- [x] Conservar 24 archivos de fases anteriores.
+- [x] Obtener 5 archivos reales de REA vía web_fetch.
+- [x] Crear estructura vendor/rea/ con archivos obtenidos.
+- [x] Documentar estado real y bloqueos.
+- [x] Definir procedimientos de desbloqueo.
+- [ ] ⚠️ Obtener anagrama oficial (BLOQUEADO — requiere propietario).
+- [ ] ⚠️ Obtener repositorio REA completo (BLOQUEADO — requiere ZIP/terminal).
+- [ ] ⚠️ Construir web derivada completa (BLOQUEADO — requiere repositorio).
 
 ### FASE 3 — Web Corporativa Completa ⏳ PENDIENTE
 - [ ] Página de inicio con identidad completa.

@@ -1,6 +1,6 @@
 # ESTADO DEL PROYECTO — AL-ANDALUS AI
 
-> Última actualización: FASE 2 — Identidad Corporativa (PARCIAL).
+> Última actualización: FASE 2.1 — Recuperación y Desbloqueo (PARCIAL).
 > Fecha: 15 de octubre de 2026.
 
 ---
@@ -81,6 +81,22 @@
 - ✅ Documentación completa de la FASE 2.
 - ✅ Build verificado sin errores.
 - ✅ Espacio reservado para anagrama (sin inventar).
+
+### FASE 2.1
+- ✅ Verificación exhaustiva del entorno (capacidades y limitaciones).
+- ✅ Conservación de los 24 archivos anteriores sin modificaciones.
+- ✅ Obtención real de 5 archivos del repositorio REA vía web_fetch:
+  - header.html.tmpl (plantilla de cabecera)
+  - footer.html.tmpl (plantilla de pie)
+  - README.md (documentación del website)
+  - index.html (página principal completa ~40 KB)
+  - theme.js (script de tema)
+- ✅ Estructura vendor/rea/ creada con archivos reales.
+- ✅ Documentación de FASE 2.1 (docs/FASE21_RECUPERACION.md).
+- ✅ Identificación clara de bloqueos y procedimientos de desbloqueo.
+- ⚠️ Anagrama oficial: BLOQUEADO (archivo no proporcionado).
+- ⚠️ Repositorio REA completo: BLOQUEADO (sin terminal/git).
+- ⚠️ Web derivada completa: BLOQUEADA (requiere repositorio completo).
 
 ## ¿Qué está pendiente?
 
