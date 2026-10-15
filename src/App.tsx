@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import PartituraViva from './features/live-score/PartituraViva';
 
 // ============================================================
 // HOOK: useTheme
@@ -73,6 +74,9 @@ function Navbar({ theme, toggleTheme }: { theme: string; toggleTheme: () => void
             <a href="#filosofia" className="hover:opacity-70 transition-opacity text-sm font-medium" style={{ color: 'var(--andalusia-text)' }}>
               Filosofía
             </a>
+            <a href="#partitura-viva" className="hover:opacity-70 transition-opacity text-sm font-medium" style={{ color: 'var(--andalusia-text)' }}>
+              Partitura Viva
+            </a>
             <a href="#acerca" className="hover:opacity-70 transition-opacity text-sm font-medium" style={{ color: 'var(--andalusia-text)' }}>
               Acerca de
             </a>
@@ -114,6 +118,7 @@ function Navbar({ theme, toggleTheme }: { theme: string; toggleTheme: () => void
               <a href="#inicio" onClick={() => setMenuOpen(false)} className="hover:opacity-70" style={{ color: 'var(--andalusia-text)' }}>Inicio</a>
               <a href="#productos" onClick={() => setMenuOpen(false)} className="hover:opacity-70" style={{ color: 'var(--andalusia-text)' }}>Productos</a>
               <a href="#filosofia" onClick={() => setMenuOpen(false)} className="hover:opacity-70" style={{ color: 'var(--andalusia-text)' }}>Filosofía</a>
+              <a href="#partitura-viva" onClick={() => setMenuOpen(false)} className="hover:opacity-70" style={{ color: 'var(--andalusia-text)' }}>Partitura Viva</a>
               <a href="#acerca" onClick={() => setMenuOpen(false)} className="hover:opacity-70" style={{ color: 'var(--andalusia-text)' }}>Acerca de</a>
               <button onClick={toggleTheme} className="text-left hover:opacity-70" style={{ color: 'var(--andalusia-text)' }}>
                 Cambiar tema
@@ -293,6 +298,17 @@ function PhilosophySection() {
             </div>
           ))}
         </div>
+
+        {/* Enlace a Partitura Viva */}
+        <div className="text-center mt-12">
+          <a
+            href="#partitura-viva"
+            className="inline-block px-8 py-4 rounded-xl font-semibold text-lg transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+            style={{ backgroundColor: 'var(--andalusia-green)', color: 'white' }}
+          >
+            Explorar Partitura Viva →
+          </a>
+        </div>
       </div>
     </section>
   );
@@ -443,6 +459,7 @@ export default function App() {
       <HeroSection />
       <ProductsSection />
       <PhilosophySection />
+      <PartituraViva />
       <AboutSection />
       <Footer />
     </div>
