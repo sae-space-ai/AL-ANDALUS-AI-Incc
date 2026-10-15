@@ -1,6 +1,6 @@
 # ESTADO DEL PROYECTO — AL-ANDALUS AI
 
-> Última actualización: FASE 2.1 — Recuperación y Desbloqueo (PARCIAL).
+> Última actualización: FASE 2.2 — Integración Real de Fuentes (BLOQUEADA).
 > Fecha: 15 de octubre de 2026.
 
 ---
@@ -97,6 +97,20 @@
 - ⚠️ Anagrama oficial: BLOQUEADO (archivo no proporcionado).
 - ⚠️ Repositorio REA completo: BLOQUEADO (sin terminal/git).
 - ⚠️ Web derivada completa: BLOQUEADA (requiere repositorio completo).
+
+### FASE 2.2
+- ✅ Verificación de recursos incorporados (anagrama y ZIP de REA).
+- ✅ Confirmación de que NO se han incorporado recursos nuevos.
+- ✅ Búsqueda exhaustiva en todas las ubicaciones autorizadas.
+- ✅ Documentación de FASE 2.2 (docs/FASE22_INTEGRACION.md).
+- ✅ Guía de migración a Qwen Code con terminal (docs/MIGRACION_QWEN_CODE.md).
+- ✅ Conservación de los 33 archivos anteriores sin modificaciones.
+- ✅ Identificación clara de limitaciones del entorno.
+- ✅ Procedimientos detallados para desbloqueo.
+- ❌ Anagrama oficial: NO INCORPORADO (archivo no existe en el proyecto).
+- ❌ Repositorio REA completo: NO INCORPORADO (ZIP no existe en el proyecto).
+- ❌ Web derivada completa: NO CONSTRUIDA (requiere recursos faltantes).
+- ❌ Integración del anagrama: NO REALIZADA (archivo no disponible).
 
 ## ¿Qué está pendiente?
 

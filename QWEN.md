@@ -77,6 +77,7 @@ Inspiración: el contrapunto musical de **Johann Sebastian Bach**.
 | 1 | Auditoría de REA | ⚠️ Parcialmente verificada |
 | 2 | Identidad corporativa y tema Andalucía | ⚠️ Parcial (anagrama bloqueado) |
 | 2.1 | Recuperación y desbloqueo | ⚠️ Parcial (5 archivos REA obtenidos) |
+| 2.2 | Integración real de fuentes | ❌ Bloqueada (recursos no incorporados) |
 | 2 | Identidad corporativa visual | ⏳ Pendiente |
 | 3 | Web corporativa completa | ⏳ Pendiente |
 | 4 | Consola empresarial | ⏳ Pendiente |
@@ -163,3 +164,25 @@ Inspiración: el contrapunto musical de **Johann Sebastian Bach**.
   - Opción C: Obtención incremental
 - Recomendación: Continuar en este entorno para web corporativa.
   Migrar a Qwen Code con terminal para web derivada completa.
+
+### Sesión 5 — FASE 2.2 (BLOQUEADA)
+- Verificación exhaustiva de recursos incorporados.
+- Búsqueda en todas las ubicaciones autorizadas:
+  - `**/*anagrama*` → 0 resultados
+  - `**/*ANAGRAMA*` → 0 resultados
+  - `**/*.zip` → 0 resultados
+  - `**/*.png` → Solo PNGs de node_modules
+- Confirmación de que NO se han incorporado recursos nuevos.
+- Documentación de FASE 2.2: docs/FASE22_INTEGRACION.md
+- Guía de migración a Qwen Code con terminal: docs/MIGRACION_QWEN_CODE.md
+- Conservación de los 33 archivos anteriores sin modificaciones.
+- Identificación clara de limitaciones del entorno.
+- Procedimientos detallados para desbloqueo.
+- Estado final: FASE 2.2 BLOQUEADA.
+  - Anagrama oficial: NO INCORPORADO
+  - Repositorio REA completo: NO INCORPORADO
+  - Web derivada: NO CONSTRUIDA
+  - Integración del anagrama: NO REALIZADA
+- Acción requerida del propietario:
+  - Proporcionar anagrama oficial
+  - Proporcionar ZIP de REA o migrar a Qwen Code con terminal
