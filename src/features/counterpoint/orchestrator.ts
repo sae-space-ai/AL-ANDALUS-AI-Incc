@@ -44,6 +44,7 @@ const VALID_TRANSITIONS: Record<ExecutionState, ExecutionState[]> = {
 
 export class CounterpointOrchestrator {
   private workflows: Map<string, Workflow> = new Map();
+  private tasks: Map<string, Task> = new Map();
   private events: ExecutionEvent[] = [];
   private provenanceGraphs: Map<string, ProvenanceGraph> = new Map();
   private pausedWorkflows: Set<string> = new Set();
@@ -188,9 +189,14 @@ export class CounterpointOrchestrator {
     };
 
     this.workflows.set(workflow.id, workflow);
+    this.tasks.set(task.id, task);
     this.logEvent('workflow_completed', `Flujo de trabajo creado: ${workflow.id}`);
 
     return workflow;
+  }
+
+  getTaskById(taskId: string): Task | undefined {
+    return this.tasks.get(taskId);
   }
 
   private analyzeRequiredRoles(task: Task): AgentRole[] {
@@ -272,7 +278,8 @@ export class CounterpointOrchestrator {
     // Verificar si Modo Espejo está habilitado
     if (config.enableMirrorMode) {
       this.transitionState(step, 'VERIFYING');
-      const verificationResult = await this.verifyStep(step, agent);
+      const task = this.getTaskById(step.taskId);
+      const verificationResult = await this.verifyStep(step, agent, task);
       step.verificationResult = verificationResult;
 
       if (verificationResult.passed) {
@@ -321,19 +328,68 @@ export class CounterpointOrchestrator {
   // VERIFICACIÓN (MODO ESPEJO)
   // ============================================================
 
-  private async verifyStep(step: WorkflowStep, agent: Agent): Promise<VerificationResult> {
-    // Simular verificación
+  private async verifyStep(step: WorkflowStep, agent: Agent, task?: Task): Promise<VerificationResult> {
+    // Verificación basada en criterios reales, no aleatoriedad
     await new Promise(resolve => setTimeout(resolve, 50));
 
-    const passed = Math.random() > 0.1; // 90% de probabilidad de pasar
+    const criteriaResults: Array<{
+      criterion: string;
+      passed: boolean;
+      evidence: string;
+    }> = [];
+
+    // Criterio 1: El paso debe tener output definido
+    const hasOutput = step.output !== undefined && step.output !== null;
+    criteriaResults.push({
+      criterion: 'Output generado',
+      passed: hasOutput,
+      evidence: hasOutput ? `Output presente con ${Object.keys(step.output || {}).length} campos` : 'No hay output',
+    });
+
+    // Criterio 2: El output debe contener información del agente
+    const hasAgentInfo = step.output?.agentId === agent.id;
+    criteriaResults.push({
+      criterion: 'Información del agente correcta',
+      passed: hasAgentInfo,
+      evidence: hasAgentInfo ? `agentId coincide: ${agent.id}` : 'agentId no coincide o falta',
+    });
+
+    // Criterio 3: El paso debe tener duración registrada
+    const hasDuration = step.duration !== undefined && step.duration >= 0;
+    criteriaResults.push({
+      criterion: 'Duración registrada',
+      passed: hasDuration,
+      evidence: hasDuration ? `Duración: ${step.duration}ms` : 'Duración no registrada',
+    });
+
+    // Criterio 4: Si hay criterios de aceptación en la tarea, verificarlos
+    if (task?.acceptanceCriteria && task.acceptanceCriteria.length > 0) {
+      // Verificar que el output menciona los criterios (simulación)
+      const outputStr = JSON.stringify(step.output).toLowerCase();
+      const criteriaMet = task.acceptanceCriteria.filter(c => 
+        outputStr.includes(c.toLowerCase()) || 
+        step.output?.result?.toLowerCase().includes(c.toLowerCase())
+      );
+      
+      criteriaResults.push({
+        criterion: `Criterios de aceptación (${criteriaMet.length}/${task.acceptanceCriteria.length})`,
+        passed: criteriaMet.length === task.acceptanceCriteria.length,
+        evidence: `Cumplidos: ${criteriaMet.join(', ') || 'ninguno'}`,
+      });
+    }
+
+    // Determinar si pasó todas las verificaciones
+    const allPassed = criteriaResults.every(c => c.passed);
+    const passedCount = criteriaResults.filter(c => c.passed).length;
 
     return {
       stepId: step.id,
-      criteria: 'Criterios de aceptación cumplidos',
-      passed,
-      evidence: passed ? 'Evidencia verificada' : 'Evidencia insuficiente',
+      criteria: `${passedCount}/${criteriaResults.length} criterios cumplidos`,
+      passed: allPassed,
+      evidence: criteriaResults.map(c => `${c.criterion}: ${c.evidence}`).join('; '),
       verifiedAt: new Date(),
       verifiedBy: 'agent-verifier',
+      details: criteriaResults,
     };
   }
 
@@ -538,6 +594,244 @@ export class CounterpointOrchestrator {
       // Incluir eventos de pasos de este workflow
       return stepIds.has(e.stepId);
     });
+  }
+
+  // ============================================================
+  // MESA DE DIRECCIÓN HUMANA
+  // ============================================================
+
+  /**
+   * Invitar un agente adicional al workflow
+   */
+  inviteAgent(workflowId: string, agentId: string, action: string): boolean {
+    const workflow = this.workflows.get(workflowId);
+    if (!workflow) return false;
+
+    const agent = getAgentById(agentId);
+    if (!agent) return false;
+
+    // Verificar que el agente no esté ya en el workflow
+    const existingStep = workflow.steps.find(s => s.agentId === agentId);
+    if (existingStep) return false;
+
+    // Crear nuevo paso
+    const newStep: WorkflowStep = {
+      id: `step-${workflow.taskId}-${agent.role}-${Date.now()}`,
+      taskId: workflow.taskId,
+      agentId: agent.id,
+      action,
+      dependencies: [],
+      status: 'PENDING',
+    };
+
+    workflow.steps.push(newStep);
+    this.logEvent('agent_invited', `Agente ${agent.name} invitado al workflow`, newStep.id, agent.id);
+    return true;
+  }
+
+  /**
+   * Aprobar entrada de datos para un paso
+   */
+  approveInput(workflowId: string, stepId: string, input: any): boolean {
+    const workflow = this.workflows.get(workflowId);
+    if (!workflow) return false;
+
+    const step = workflow.steps.find(s => s.id === stepId);
+    if (!step) return false;
+
+    step.input = input;
+    this.logEvent('input_approved', `Entrada aprobada para paso ${stepId}`, stepId, step.agentId, { input });
+    return true;
+  }
+
+  /**
+   * Rechazar entrada de datos para un paso
+   */
+  rejectInput(workflowId: string, stepId: string, reason: string): boolean {
+    const workflow = this.workflows.get(workflowId);
+    if (!workflow) return false;
+
+    const step = workflow.steps.find(s => s.id === stepId);
+    if (!step) return false;
+
+    step.input = undefined;
+    this.transitionState(step, 'BLOCKED');
+    this.logEvent('input_rejected', `Entrada rechazada: ${reason}`, stepId, step.agentId, { reason });
+    return true;
+  }
+
+  /**
+   * Dar entrada a un agente (forzar inicio)
+   */
+  giveEntry(workflowId: string, stepId: string): boolean {
+    const workflow = this.workflows.get(workflowId);
+    if (!workflow) return false;
+
+    const step = workflow.steps.find(s => s.id === stepId);
+    if (!step) return false;
+
+    if (step.status === 'PENDING' || step.status === 'WAITING') {
+      this.transitionState(step, 'READY');
+      this.logEvent('entry_given', `Entrada dada al paso ${stepId}`, stepId, step.agentId);
+      return true;
+    }
+    return false;
+  }
+
+  /**
+   * Solicitar intervención de un agente específico
+   */
+  requestIntervention(workflowId: string, agentId: string, task: string): boolean {
+    const workflow = this.workflows.get(workflowId);
+    if (!workflow) return false;
+
+    const agent = getAgentById(agentId);
+    if (!agent) return false;
+
+    // Crear paso de intervención
+    const interventionStep: WorkflowStep = {
+      id: `intervention-${workflow.taskId}-${agent.role}-${Date.now()}`,
+      taskId: workflow.taskId,
+      agentId: agent.id,
+      action: `Intervención: ${task}`,
+      dependencies: [],
+      status: 'READY',
+    };
+
+    workflow.steps.push(interventionStep);
+    this.logEvent('intervention_requested', `Intervención solicitada: ${task}`, interventionStep.id, agent.id, { task });
+    return true;
+  }
+
+  /**
+   * Transferir protagonismo de un agente a otro
+   */
+  transferProtagonism(workflowId: string, fromStepId: string, toAgentId: string): boolean {
+    const workflow = this.workflows.get(workflowId);
+    if (!workflow) return false;
+
+    const fromStep = workflow.steps.find(s => s.id === fromStepId);
+    if (!fromStep) return false;
+
+    const toAgent = getAgentById(toAgentId);
+    if (!toAgent) return false;
+
+    // Si el paso original está en ejecución, pausarlo
+    if (fromStep.status === 'RUNNING') {
+      this.transitionState(fromStep, 'WAITING');
+    }
+
+    // Crear nuevo paso para el agente destino
+    const newStep: WorkflowStep = {
+      id: `step-${workflow.taskId}-${toAgent.role}-${Date.now()}`,
+      taskId: workflow.taskId,
+      agentId: toAgent.id,
+      action: `Continuación de: ${fromStep.action}`,
+      dependencies: [fromStepId],
+      status: 'READY',
+    };
+
+    workflow.steps.push(newStep);
+    this.logEvent('protagonism_transferred', `Protagonismo transferido de ${fromStep.agentId} a ${toAgentId}`, newStep.id, toAgentId);
+    return true;
+  }
+
+  /**
+   * Dar salida a un agente (finalizar su participación)
+   */
+  giveExit(workflowId: string, stepId: string): boolean {
+    const workflow = this.workflows.get(workflowId);
+    if (!workflow) return false;
+
+    const step = workflow.steps.find(s => s.id === stepId);
+    if (!step) return false;
+
+    if (step.status === 'RUNNING' || step.status === 'WAITING' || step.status === 'READY') {
+      this.transitionState(step, 'SUCCEEDED');
+      step.completedAt = new Date();
+      this.logEvent('exit_given', `Salida dada al paso ${stepId}`, stepId, step.agentId);
+      return true;
+    }
+    return false;
+  }
+
+  // ============================================================
+  // MODO CANGREJO - TRAZABILIDAD RETRÓGRADA
+  // ============================================================
+
+  /**
+   * Obtener la cadena de proveniencia de un paso hacia atrás
+   */
+  getProvenanceChain(workflowId: string, stepId: string): ProvenanceNode[] {
+    const graph = this.provenanceGraphs.get(workflowId);
+    if (!graph) return [];
+
+    const chain: ProvenanceNode[] = [];
+    const visited = new Set<string>();
+
+    const traverse = (currentStepId: string) => {
+      if (visited.has(currentStepId)) return;
+      visited.add(currentStepId);
+
+      const node = graph.nodes.find(n => n.stepId === currentStepId);
+      if (node) {
+        chain.unshift(node); // Añadir al principio para orden cronológico
+
+        // Recorrer dependencias hacia atrás
+        for (const depId of node.dependencies) {
+          traverse(depId);
+        }
+      }
+    };
+
+    traverse(stepId);
+    return chain;
+  }
+
+  /**
+   * Verificar integridad de la trazabilidad
+   */
+  verifyTraceability(workflowId: string, stepId: string): {
+    status: 'complete' | 'incomplete' | 'evidence_missing';
+    chain: ProvenanceNode[];
+    missingDependencies: string[];
+  } {
+    const chain = this.getProvenanceChain(workflowId, stepId);
+    const missingDependencies: string[] = [];
+
+    for (const node of chain) {
+      // Verificar que tiene input
+      if (node.input === undefined || node.input === null) {
+        missingDependencies.push(`${node.stepId}: input faltante`);
+      }
+
+      // Verificar que tiene output
+      if (node.output === undefined || node.output === null) {
+        missingDependencies.push(`${node.stepId}: output faltante`);
+      }
+
+      // Verificar que las dependencias existen en el grafo
+      const graph = this.provenanceGraphs.get(workflowId);
+      if (graph) {
+        for (const depId of node.dependencies) {
+          const depExists = graph.nodes.some(n => n.stepId === depId);
+          if (!depExists) {
+            missingDependencies.push(`${node.stepId}: dependencia ${depId} no encontrada`);
+          }
+        }
+      }
+    }
+
+    let status: 'complete' | 'incomplete' | 'evidence_missing';
+    if (missingDependencies.length === 0) {
+      status = 'complete';
+    } else if (missingDependencies.some(d => d.includes('faltante'))) {
+      status = 'evidence_missing';
+    } else {
+      status = 'incomplete';
+    }
+
+    return { status, chain, missingDependencies };
   }
 }
 

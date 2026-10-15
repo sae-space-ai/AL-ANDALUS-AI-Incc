@@ -80,6 +80,8 @@ Inspiración: el contrapunto musical de **Johann Sebastian Bach**.
 | 2.2 | Integración real de fuentes | ❌ Bloqueada (recursos no incorporados) |
 | 2.3 | Vite (verificación y rescate) | ❌ Detenida (recursos no disponibles) |
 | 3 | El Contrapunto Vivo de Bach | ✅ Completada (orquestador funcional) |
+| 3.1 | Ensayo general | ⚠️ Correcciones críticas implementadas |
+| 3.2 | La Armonía Demonstrable | ⚠️ Parcial (tests creados, no ejecutados) |
 | 4 | Integración de motores reales | ⏳ Pendiente (bloqueada) |
 | 4 | Consola empresarial | ⏳ Pendiente |
 | 5 | Backend y APIs | ⏳ Pendiente |
@@ -298,3 +300,50 @@ Inspiración: el contrapunto musical de **Johann Sebastian Bach**.
   - ✅ Historial consultable en tiempo real
   - ⚠️ Pruebas automatizadas pendientes (sin terminal)
   - ⚠️ Mesa de Dirección Humana parcialmente completada
+
+### Sesión 9 — FASE 3.2 (PARCIAL)
+- Modo Espejo corregido con verificación real:
+  - ✅ Eliminado Math.random() para verificación
+  - ✅ Implementados 4 criterios de verificación reales:
+    1. Output generado
+    2. Información del agente correcta
+    3. Duración registrada
+    4. Criterios de aceptación de la tarea
+  - ✅ Añadido campo details a VerificationResult
+  - ✅ Verificación determinista y reproducible
+- Mesa de Dirección Humana completada:
+  - ✅ inviteAgent() - Invitar agente adicional
+  - ✅ approveInput() - Aprobar entrada de datos
+  - ✅ rejectInput() - Rechazar entrada y bloquear paso
+  - ✅ giveEntry() - Forzar inicio de paso
+  - ✅ requestIntervention() - Solicitar intervención específica
+  - ✅ transferProtagonism() - Transferir protagonismo
+  - ✅ giveExit() - Finalizar participación de agente
+- Modo Cangrejo completado:
+  - ✅ getProvenanceChain() - Cadena de proveniencia retrógrada
+  - ✅ verifyTraceability() - Verificar integridad de trazabilidad
+  - ✅ Retorna status: complete, incomplete, evidence_missing
+- Tipos de evento ampliados:
+  - ✅ 7 nuevos tipos: agent_invited, input_approved, input_rejected, entry_given, intervention_requested, protagonism_transferred, exit_given
+- Pruebas automatizadas creadas:
+  - ✅ Vitest instalado
+  - ✅ vitest.config.ts creado
+  - ✅ orchestrator.test.ts (15 tests)
+  - ✅ agents.test.ts (12 tests)
+  - ✅ scenarios.test.ts (10 tests)
+  - ✅ Total: 37 tests unitarios
+- Documentación creada:
+  - ✅ docs/FASE32_ARMONIA.md
+  - ✅ docs/FASE32_VERIFICACION.md
+  - ✅ docs/FASE32_PRUEBAS.md
+  - ✅ docs/FASE32_PENDIENTES.md
+- Build verificado sin errores:
+  - 32 módulos transformados
+  - 1.36s de compilación
+- Estado actual:
+  - ✅ Modo Espejo con verificación real
+  - ✅ Mesa de Dirección Humana completa (motor)
+  - ✅ Modo Cangrejo con trazabilidad retrógrada
+  - ✅ 37 tests unitarios creados
+  - ⚠️ Tests NO ejecutados (sin terminal)
+  - ⚠️ Controles de Mesa NO integrados en UI

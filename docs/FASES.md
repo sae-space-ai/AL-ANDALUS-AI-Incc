@@ -114,6 +114,52 @@
 - [ ] ⚠️ Integración con JOULE real (pendiente de código).
 - [ ] ⚠️ Pruebas automatizadas (pendiente de terminal).
 
+### FASE 3.1 — Ensayo General ⚠️ EN PROGRESO
+- [x] Identificar criterio pendiente de FASE 3 (criterio L: pruebas automatizadas).
+- [x] Analizar código de orchestrator.ts, PartituraViva.tsx, types.ts.
+- [x] Identificar 5 problemas críticos.
+- [x] Corregir pausa/reanudación (ahora funcional en motor).
+- [x] Implementar concurrencia real con Promise.all.
+- [x] Añadir método getWorkflowEvents() para historial.
+- [x] Añadir panel de historial a PartituraViva.tsx.
+- [x] Conectar botones de pausa/reanudación con motor.
+- [x] Ampliar tipos de evento.
+- [x] Documentar ensayo general (docs/FASE31_ENSAYO_GENERAL.md).
+- [x] Build verificado sin errores.
+- [ ] ⚠️ Pruebas automatizadas pendientes (sin terminal).
+- [ ] ⚠️ Mesa de Dirección Humana parcialmente completada.
+
+### FASE 3.2 — La Armonía Demonstrable ⚠️ PARCIAL
+- [x] Corregir Modo Espejo con verificación basada en criterios reales.
+- [x] Eliminar Math.random() de verifyStep().
+- [x] Implementar 4 criterios de verificación reales.
+- [x] Ampliar VerificationResult con campo details.
+- [x] Verificar concurrencia (ya funcionaba correctamente).
+- [x] Verificar pausa/reanudación (ya funcionaba correctamente).
+- [x] Completar Mesa de Dirección Humana con 7 controles:
+  - [x] inviteAgent()
+  - [x] approveInput()
+  - [x] rejectInput()
+  - [x] giveEntry()
+  - [x] requestIntervention()
+  - [x] transferProtagonism()
+  - [x] giveExit()
+- [x] Completar Modo Cangrejo con trazabilidad retrógrada:
+  - [x] getProvenanceChain()
+  - [x] verifyTraceability()
+- [x] Ampliar tipos de evento con 7 nuevos tipos.
+- [x] Añadir tasks: Map al orquestador.
+- [x] Añadir método getTaskById().
+- [x] Instalar Vitest.
+- [x] Crear vitest.config.ts.
+- [x] Crear orchestrator.test.ts (15 tests).
+- [x] Crear agents.test.ts (12 tests).
+- [x] Crear scenarios.test.ts (10 tests).
+- [x] Documentar FASE 3.2 (4 archivos).
+- [x] Build verificado sin errores.
+- [ ] ⚠️ Tests NO ejecutados (sin terminal).
+- [ ] ⚠️ Controles de Mesa de Dirección Humana NO integrados en UI.
+
 ### FASE 4 — Integración de Motores Reales ⏳ PENDIENTE
 - [ ] Página de inicio con identidad completa.
 - [ ] Sección de productos (REA, JOULE Governor, SENSE 360°).

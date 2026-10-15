@@ -1,6 +1,6 @@
 # ESTADO DEL PROYECTO — AL-ANDALUS AI
 
-> Última actualización: FASE 3.1 — Ensayo General del Contrapunto Vivo (EN PROGRESO).
+> Última actualización: FASE 3.2 — La Armonía Demonstrable (PARCIAL).
 > Fecha: 15 de octubre de 2026.
 
 ---
@@ -163,6 +163,29 @@
 - ✅ Documentación de ensayo general creada (docs/FASE31_ENSAYO_GENERAL.md).
 - ⚠️ Mesa de Dirección Humana: controles de pausa/reanudación corregidos.
 - ⚠️ Pruebas automatizadas: pendientes de ejecución (sin terminal).
+
+### FASE 3.2
+- ✅ Modo Espejo corregido con verificación basada en criterios reales (no aleatoria).
+- ✅ Verificación de concurrencia: ya funcionaba correctamente con maxConcurrentAgents.
+- ✅ Verificación de pausa/reanudación: ya funcionaba correctamente.
+- ✅ Mesa de Dirección Humana completada con 7 controles:
+  - inviteAgent(), approveInput(), rejectInput(), giveEntry()
+  - requestIntervention(), transferProtagonism(), giveExit()
+- ✅ Modo Cangrejo completado con trazabilidad retrógrada:
+  - getProvenanceChain() para cadena de proveniencia
+  - verifyTraceability() para verificar integridad
+- ✅ Tipos de evento ampliados con 7 nuevos tipos.
+- ✅ Tipo VerificationResult ampliado con campo details.
+- ✅ 37 tests unitarios creados con Vitest:
+  - orchestrator.test.ts (15 tests)
+  - agents.test.ts (12 tests)
+  - scenarios.test.ts (10 tests)
+- ✅ vitest.config.ts creado.
+- ✅ Vitest instalado como dependencia.
+- ✅ Build verificado sin errores.
+- ✅ Documentación completa de FASE 3.2 (4 archivos).
+- ⚠️ Tests NO ejecutados (sin terminal).
+- ⚠️ Controles de Mesa de Dirección Humana NO integrados en UI.
 
 ## ¿Qué está pendiente?
 

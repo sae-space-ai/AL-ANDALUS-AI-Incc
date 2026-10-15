@@ -108,7 +108,7 @@ export interface Dependency {
 export interface ExecutionEvent {
   id: string;
   timestamp: Date;
-  type: 'step_started' | 'step_completed' | 'step_failed' | 'agent_activated' | 'agent_silent' | 'verification_passed' | 'verification_failed' | 'budget_exceeded' | 'workflow_completed' | 'workflow_paused' | 'workflow_resumed';
+  type: 'step_started' | 'step_completed' | 'step_failed' | 'agent_activated' | 'agent_silent' | 'verification_passed' | 'verification_failed' | 'budget_exceeded' | 'workflow_completed' | 'workflow_paused' | 'workflow_resumed' | 'agent_invited' | 'input_approved' | 'input_rejected' | 'entry_given' | 'intervention_requested' | 'protagonism_transferred' | 'exit_given';
   stepId?: string;
   agentId?: string;
   message: string;
@@ -139,6 +139,11 @@ export interface VerificationResult {
   evidence: string;
   verifiedAt: Date;
   verifiedBy: string; // agentId
+  details?: Array<{
+    criterion: string;
+    passed: boolean;
+    evidence: string;
+  }>;
 }
 
 // ============================================================
