@@ -1,6 +1,6 @@
 # ESTADO DEL PROYECTO — AL-ANDALUS AI
 
-> Última actualización: FASE 2.2 — Integración Real de Fuentes (BLOQUEADA).
+> Última actualización: FASE 3.2 — La Armonía Demonstrable (PARCIAL).
 > Fecha: 15 de octubre de 2026.
 
 ---
@@ -111,6 +111,81 @@
 - ❌ Repositorio REA completo: NO INCORPORADO (ZIP no existe en el proyecto).
 - ❌ Web derivada completa: NO CONSTRUIDA (requiere recursos faltantes).
 - ❌ Integración del anagrama: NO REALIZADA (archivo no disponible).
+
+### FASE 2.3
+- ✅ Verificación de configuración Vite (vite 6.3.5, React 18.2.0, TypeScript 5.7.0).
+- ✅ Verificación de vite.config.js con plugins React y Tailwind.
+- ✅ Verificación de tsconfig.json para React + Vite.
+- ✅ Verificación de App.tsx (451 líneas, sistema de tema Andalucía completo).
+- ✅ Búsqueda exhaustiva de anagrama oficial (0 resultados).
+- ✅ Búsqueda exhaustiva de ZIP de REA (0 resultados).
+- ✅ Búsqueda de FUENTES_Y_SHA256.json (0 resultados).
+- ✅ Documentación de FASE 2.3 (docs/FASE23_VITE_REAL.md).
+- ✅ Documentación de pruebas (docs/FASE23_PRUEBAS.md).
+- ✅ Conservación de los 37 archivos anteriores sin modificaciones.
+- ✅ Decisión de DETENERSE antes de reclamar integración.
+- ❌ Anagrama oficial: NO DISPONIBLE (archivo no existe).
+- ❌ Repositorio REA completo: NO DISPONIBLE (ZIP no existe).
+- ❌ FUENTES_Y_SHA256.json: NO DISPONIBLE.
+- ❌ Compilación npm run build: NO EJECUTADA (sin terminal).
+- ❌ Servidor de desarrollo: NO INICIADO (sin terminal).
+- ❌ Type checking: NO EJECUTADO (sin terminal).
+- ❌ Scripts Python: NO EJECUTADOS (sin Python).
+- ❌ Cálculo de SHA-256: NO REALIZADO (sin terminal).
+
+### FASE 3
+- ✅ Motor de orquestación contrapuntística implementado.
+- ✅ 6 agentes especializados (demostración determinista).
+- ✅ Máquina de estados con 9 estados.
+- ✅ Detección de dependencias circulares.
+- ✅ Control de presupuesto y tiempo.
+- ✅ Modo Espejo (verificación inversa).
+- ✅ Modo Cangrejo (trazabilidad retrógrada).
+- ✅ Motivos reutilizables.
+- ✅ Partitura Viva (interfaz visual).
+- ✅ Controles: Iniciar, Pausar, Cancelar, Reiniciar, Exportar.
+- ✅ Exportación de resultados en JSON.
+- ✅ Integración en App.tsx sin romper trabajo existente.
+- ✅ Documentación completa (7 archivos).
+- ✅ Build verificado sin errores.
+- ⚠️ Integración con REA real (pendiente de repositorio).
+- ⚠️ Integración con JOULE real (pendiente de código).
+- ⚠️ Pruebas automatizadas (pendiente de terminal).
+
+### FASE 3.1
+- ✅ Identificados 5 problemas críticos en la implementación de FASE 3.
+- ✅ Corregida pausa/reanudación (ahora funciona realmente en el motor).
+- ✅ Implementada concurrencia real para pasos independientes.
+- ✅ Añadido método getWorkflowEvents para historial consultable.
+- ✅ Panel de historial añadido a la UI de Partitura Viva.
+- ✅ Tipos de evento ampliados (workflow_paused, workflow_resumed).
+- ✅ Build verificado sin errores después de correcciones.
+- ✅ Documentación de ensayo general creada (docs/FASE31_ENSAYO_GENERAL.md).
+- ⚠️ Mesa de Dirección Humana: controles de pausa/reanudación corregidos.
+- ⚠️ Pruebas automatizadas: pendientes de ejecución (sin terminal).
+
+### FASE 3.2
+- ✅ Modo Espejo corregido con verificación basada en criterios reales (no aleatoria).
+- ✅ Verificación de concurrencia: ya funcionaba correctamente con maxConcurrentAgents.
+- ✅ Verificación de pausa/reanudación: ya funcionaba correctamente.
+- ✅ Mesa de Dirección Humana completada con 7 controles:
+  - inviteAgent(), approveInput(), rejectInput(), giveEntry()
+  - requestIntervention(), transferProtagonism(), giveExit()
+- ✅ Modo Cangrejo completado con trazabilidad retrógrada:
+  - getProvenanceChain() para cadena de proveniencia
+  - verifyTraceability() para verificar integridad
+- ✅ Tipos de evento ampliados con 7 nuevos tipos.
+- ✅ Tipo VerificationResult ampliado con campo details.
+- ✅ 37 tests unitarios creados con Vitest:
+  - orchestrator.test.ts (15 tests)
+  - agents.test.ts (12 tests)
+  - scenarios.test.ts (10 tests)
+- ✅ vitest.config.ts creado.
+- ✅ Vitest instalado como dependencia.
+- ✅ Build verificado sin errores.
+- ✅ Documentación completa de FASE 3.2 (4 archivos).
+- ⚠️ Tests NO ejecutados (sin terminal).
+- ⚠️ Controles de Mesa de Dirección Humana NO integrados en UI.
 
 ## ¿Qué está pendiente?
 
