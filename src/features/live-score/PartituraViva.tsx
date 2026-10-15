@@ -119,6 +119,73 @@ export default function PartituraViva() {
   };
 
   // ============================================================
+  // MESA DE DIRECCIÓN HUMANA
+  // ============================================================
+
+  const handleInviteAgent = (agentId: string) => {
+    if (!workflow) return;
+    const agent = allAgents.find(a => a.id === agentId);
+    if (!agent) return;
+    
+    const success = orchestrator.inviteAgent(workflow.id, agentId, `Intervención de ${agent.name}`);
+    if (success) {
+      setWorkflow({ ...workflow });
+    }
+  };
+
+  const handleApproveInput = (stepId: string) => {
+    if (!workflow) return;
+    const input = { approved: true, timestamp: new Date().toISOString() };
+    const success = orchestrator.approveInput(workflow.id, stepId, input);
+    if (success) {
+      setWorkflow({ ...workflow });
+    }
+  };
+
+  const handleRejectInput = (stepId: string) => {
+    if (!workflow) return;
+    const success = orchestrator.rejectInput(workflow.id, stepId, 'Entrada rechazada por el director');
+    if (success) {
+      setWorkflow({ ...workflow });
+    }
+  };
+
+  const handleGiveEntry = (stepId: string) => {
+    if (!workflow) return;
+    const success = orchestrator.giveEntry(workflow.id, stepId);
+    if (success) {
+      setWorkflow({ ...workflow });
+    }
+  };
+
+  const handleRequestIntervention = (agentId: string) => {
+    if (!workflow) return;
+    const agent = allAgents.find(a => a.id === agentId);
+    if (!agent) return;
+    
+    const success = orchestrator.requestIntervention(workflow.id, agentId, 'Intervención solicitada por el director');
+    if (success) {
+      setWorkflow({ ...workflow });
+    }
+  };
+
+  const handleTransferProtagonism = (fromStepId: string, toAgentId: string) => {
+    if (!workflow) return;
+    const success = orchestrator.transferProtagonism(workflow.id, fromStepId, toAgentId);
+    if (success) {
+      setWorkflow({ ...workflow });
+    }
+  };
+
+  const handleGiveExit = (stepId: string) => {
+    if (!workflow) return;
+    const success = orchestrator.giveExit(workflow.id, stepId);
+    if (success) {
+      setWorkflow({ ...workflow });
+    }
+  };
+
+  // ============================================================
   // RENDERIZADO
   // ============================================================
 
@@ -421,6 +488,117 @@ export default function PartituraViva() {
                       )}
                     </div>
                   </div>
+
+                  {/* Mesa de Dirección Humana */}
+                  {workflow && (
+                    <div className="mt-6 pt-6 border-t" style={{ borderColor: 'var(--andalusia-border)' }}>
+                      <h4 className="font-semibold text-sm mb-4" style={{ color: 'var(--andalusia-text)' }}>
+                        🎼 Mesa de Dirección Humana
+                      </h4>
+                      
+                      {/* Invitar Agente */}
+                      <div className="mb-4">
+                        <p className="text-xs font-medium mb-2" style={{ color: 'var(--andalusia-text-secondary)' }}>
+                          Invitar agente adicional:
+                        </p>
+                        <div className="flex flex-wrap gap-2">
+                          {allAgents.map(agent => {
+                            const isInWorkflow = workflow.steps.some(s => s.agentId === agent.id);
+                            return (
+                              <button
+                                key={agent.id}
+                                onClick={() => handleInviteAgent(agent.id)}
+                                disabled={isInWorkflow}
+                                className="px-3 py-1 text-xs rounded transition-all disabled:opacity-30"
+                                style={{ 
+                                  backgroundColor: isInWorkflow ? 'var(--andalusia-border)' : 'var(--andalusia-green)',
+                                  color: 'white'
+                                }}
+                              >
+                                {agent.name} {isInWorkflow ? '✓' : '+'}
+                              </button>
+                            );
+                          })}
+                        </div>
+                      </div>
+
+                      {/* Control de pasos */}
+                      <div className="mb-4">
+                        <p className="text-xs font-medium mb-2" style={{ color: 'var(--andalusia-text-secondary)' }}>
+                          Control de intervenciones:
+                        </p>
+                        <div className="space-y-2">
+                          {workflow.steps.map(step => {
+                            const agent = allAgents.find(a => a.id === step.agentId);
+                            return (
+                              <div key={step.id} className="flex items-center gap-2 p-2 rounded text-xs" style={{ backgroundColor: 'var(--andalusia-bg)' }}>
+                                <span className="flex-1 font-medium" style={{ color: 'var(--andalusia-text)' }}>
+                                  {agent?.name}: {step.action}
+                                </span>
+                                <span className="px-2 py-0.5 rounded text-xs" style={{ 
+                                  backgroundColor: step.status === 'SUCCEEDED' ? 'var(--andalusia-green)' : 
+                                                   step.status === 'RUNNING' ? '#f59e0b' : 
+                                                   step.status === 'FAILED' ? '#dc2626' : 'var(--andalusia-border)',
+                                  color: 'white'
+                                }}>
+                                  {step.status}
+                                </span>
+                                {step.status === 'PENDING' && (
+                                  <>
+                                    <button
+                                      onClick={() => handleGiveEntry(step.id)}
+                                      className="px-2 py-1 rounded text-xs"
+                                      style={{ backgroundColor: 'var(--andalusia-green)', color: 'white' }}
+                                      title="Dar entrada"
+                                    >
+                                      ▶
+                                    </button>
+                                    <button
+                                      onClick={() => handleRejectInput(step.id)}
+                                      className="px-2 py-1 rounded text-xs"
+                                      style={{ backgroundColor: '#dc2626', color: 'white' }}
+                                      title="Rechazar"
+                                    >
+                                      ✗
+                                    </button>
+                                  </>
+                                )}
+                                {(step.status === 'RUNNING' || step.status === 'WAITING') && (
+                                  <button
+                                    onClick={() => handleGiveExit(step.id)}
+                                    className="px-2 py-1 rounded text-xs"
+                                    style={{ backgroundColor: 'var(--andalusia-border)', color: 'var(--andalusia-text)' }}
+                                    title="Dar salida"
+                                  >
+                                    ⏹
+                                  </button>
+                                )}
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </div>
+
+                      {/* Solicitar Intervención */}
+                      <div>
+                        <p className="text-xs font-medium mb-2" style={{ color: 'var(--andalusia-text-secondary)' }}>
+                          Solicitar intervención urgente:
+                        </p>
+                        <div className="flex flex-wrap gap-2">
+                          {allAgents.map(agent => (
+                            <button
+                              key={agent.id}
+                              onClick={() => handleRequestIntervention(agent.id)}
+                              className="px-3 py-1 text-xs rounded transition-all"
+                              style={{ backgroundColor: '#f59e0b', color: 'white' }}
+                            >
+                              ⚡ {agent.name}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
               )}
             </div>
