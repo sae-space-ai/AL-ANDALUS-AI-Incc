@@ -59,6 +59,19 @@
 - [ ] ⚠️ Obtener repositorio REA completo (BLOQUEADO — requiere ZIP/terminal).
 - [ ] ⚠️ Construir web derivada completa (BLOQUEADO — requiere repositorio).
 
+### FASE 2.2 — Integración Real de Fuentes ❌ BLOQUEADA
+- [x] Verificar si se han incorporado recursos (anagrama y ZIP).
+- [x] Búsqueda exhaustiva en todas las ubicaciones autorizadas.
+- [x] Confirmar que NO se han incorporado recursos nuevos.
+- [x] Documentar estado de FASE 2.2 (docs/FASE22_INTEGRACION.md).
+- [x] Crear guía de migración a Qwen Code (docs/MIGRACION_QWEN_CODE.md).
+- [x] Conservar los 33 archivos anteriores sin modificaciones.
+- [ ] ❌ Incorporar anagrama oficial (NO DISPONIBLE — archivo no existe).
+- [ ] ❌ Incorporar repositorio REA completo (NO DISPONIBLE — ZIP no existe).
+- [ ] ❌ Construir web derivada completa (BLOQUEADO — requiere recursos).
+- [ ] ❌ Integrar anagrama en sistema de branding (BLOQUEADO — archivo no disponible).
+- [ ] ❌ Calcular SHA-256 del anagrama (BLOQUEADO — archivo no disponible).
+
 ### FASE 3 — Web Corporativa Completa ⏳ PENDIENTE
 - [ ] Página de inicio con identidad completa.
 - [ ] Sección de productos (REA, JOULE Governor, SENSE 360°).
