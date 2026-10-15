@@ -54,6 +54,25 @@
 
 ---
 
+### DEC-008: Arquitectura de Integración
+- **Fecha:** FASE 1
+- **Decisión:** La integración de REA se realizará mediante capas independientes.
+- **Regla:** vendor/rea/ es SOLO LECTURA. Las extensiones viven en apps/ y packages/.
+- **Estado:** ✅ Aprobada.
+
+### DEC-009: No Reconstruir JOULE sin Código Original
+- **Fecha:** FASE 1
+- **Decisión:** No se reconstruirá JOULE Governor ni JOULE SENSE 360° sin localizar su código original.
+- **Estado:** ✅ Aprobada.
+
+### DEC-010: Auditoría Web de REA
+- **Fecha:** FASE 1
+- **Decisión:** Se ha auditado la web rea.tools: 20 idiomas, 18+ páginas, 5 casos de estudio, 1,728+ mensajes por idioma.
+- **Regla:** Preservar todo el contenido al personalizar para ANDALUS RE.
+- **Estado:** ✅ Aprobada.
+
+---
+
 ## Decisiones Pendientes
 
 | ID | Descripción | Estado |
@@ -62,6 +81,8 @@
 | PEND-002 | Constitución legal de EU Inc. | Esperando confirmación |
 | PEND-003 | Autorización para publicar | No solicitada aún |
 | PEND-004 | Presupuesto y gastos autorizados | No definidos aún |
+| PEND-005 | Clonación local de REA | Bloqueado (sin terminal) |
+| PEND-006 | Localización de código JOULE original | No localizado |
 
 ---
 
