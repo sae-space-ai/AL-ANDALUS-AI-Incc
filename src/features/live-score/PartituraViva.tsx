@@ -65,7 +65,15 @@ export default function PartituraViva() {
   };
 
   const handlePause = () => {
-    setIsPaused(!isPaused);
+    if (!workflow) return;
+    
+    if (isPaused) {
+      orchestrator.resumeWorkflow(workflow.id);
+      setIsPaused(false);
+    } else {
+      orchestrator.pauseWorkflow(workflow.id);
+      setIsPaused(true);
+    }
   };
 
   const handleCancel = () => {
@@ -383,6 +391,34 @@ export default function PartituraViva() {
                           {workflow.steps.filter(s => s.status === 'SUCCEEDED').length} / {allAgents.length}
                         </p>
                       </div>
+                    </div>
+                  </div>
+
+                  {/* Panel de Historial */}
+                  <div className="mt-6 pt-6 border-t" style={{ borderColor: 'var(--andalusia-border)' }}>
+                    <h4 className="font-semibold text-sm mb-3" style={{ color: 'var(--andalusia-text)' }}>
+                      Historial de Ejecución
+                    </h4>
+                    <div className="space-y-2 max-h-48 overflow-y-auto">
+                      {orchestrator.getWorkflowEvents(workflow.id).length === 0 ? (
+                        <p className="text-xs" style={{ color: 'var(--andalusia-text-tertiary)' }}>
+                          No hay eventos registrados
+                        </p>
+                      ) : (
+                        orchestrator.getWorkflowEvents(workflow.id).map((event, i) => (
+                          <div key={i} className="text-xs p-2 rounded" style={{ backgroundColor: 'var(--andalusia-bg)' }}>
+                            <span className="font-mono" style={{ color: 'var(--andalusia-text-tertiary)' }}>
+                              {event.timestamp.toLocaleTimeString()}
+                            </span>
+                            <span className="ml-2 font-medium" style={{ color: 'var(--andalusia-green)' }}>
+                              [{event.type}]
+                            </span>
+                            <span className="ml-2" style={{ color: 'var(--andalusia-text)' }}>
+                              {event.message}
+                            </span>
+                          </div>
+                        ))
+                      )}
                     </div>
                   </div>
                 </div>

@@ -46,6 +46,7 @@ export class CounterpointOrchestrator {
   private workflows: Map<string, Workflow> = new Map();
   private events: ExecutionEvent[] = [];
   private provenanceGraphs: Map<string, ProvenanceGraph> = new Map();
+  private pausedWorkflows: Set<string> = new Set();
 
   // ============================================================
   // VALIDACIÓN DE TRANSICIONES
@@ -377,24 +378,86 @@ export class CounterpointOrchestrator {
 
     workflow.status = 'RUNNING';
 
-    for (const step of workflow.steps) {
-      if (step.status === 'PENDING' || step.status === 'WAITING') {
+    // Ejecución concurrente con soporte de pausa
+    const executing = new Set<string>();
+    const maxConcurrent = config.budget.maxConcurrentAgents;
+
+    while (true) {
+      // Verificar pausa
+      while (this.pausedWorkflows.has(workflowId)) {
+        await new Promise(resolve => setTimeout(resolve, 100));
+      }
+
+      // Verificar cancelación (verificar si algún paso fue cancelado)
+      const anyCancelled = workflow.steps.some(s => s.status === 'CANCELLED');
+      if (anyCancelled) {
+        break;
+      }
+
+      // Encontrar pasos listos para ejecutar
+      const readySteps = workflow.steps.filter(step => {
+        if (step.status !== 'PENDING' && step.status !== 'WAITING') return false;
+        if (executing.has(step.id)) return false;
+        
+        // Verificar dependencias
+        const depsReady = step.dependencies.every(depId => {
+          const dep = workflow.steps.find(s => s.id === depId);
+          return dep?.status === 'SUCCEEDED';
+        });
+        
+        return depsReady;
+      });
+
+      // Verificar si todos los pasos están completados
+      const allDone = workflow.steps.every(
+        s => s.status === 'SUCCEEDED' || s.status === 'FAILED' || s.status === 'CANCELLED' || s.status === 'BLOCKED'
+      );
+
+      if (allDone && executing.size === 0) {
+        break;
+      }
+
+      // Ejecutar pasos en paralelo hasta el límite de concurrencia
+      const toExecute = readySteps.slice(0, maxConcurrent - executing.size);
+
+      if (toExecute.length === 0) {
+        // No hay pasos listos, esperar un poco
+        await new Promise(resolve => setTimeout(resolve, 50));
+        continue;
+      }
+
+      // Ejecutar pasos en paralelo
+      const promises = toExecute.map(async step => {
+        executing.add(step.id);
         try {
           await this.executeStep(workflowId, step.id, config);
         } catch (error) {
-          workflow.status = 'FAILED';
-          throw error;
+          // El paso falló, pero continuamos con los demás
+          console.error(`Error en paso ${step.id}:`, error);
+        } finally {
+          executing.delete(step.id);
         }
-      }
+      });
+
+      await Promise.all(promises);
     }
 
-    workflow.status = 'SUCCEEDED';
-    workflow.completedAt = new Date();
+    // Determinar estado final
+    const allSucceeded = workflow.steps.every(s => s.status === 'SUCCEEDED');
+    const anyFailed = workflow.steps.some(s => s.status === 'FAILED');
+    const anyCancelled = workflow.steps.some(s => s.status === 'CANCELLED');
+
+    if (!anyCancelled) {
+      workflow.status = allSucceeded ? 'SUCCEEDED' : (anyFailed ? 'FAILED' : 'SUCCEEDED');
+      workflow.completedAt = new Date();
+    } else {
+      workflow.status = 'CANCELLED';
+    }
 
     return {
       taskId: workflow.taskId,
       workflowId: workflow.id,
-      status: 'success',
+      status: allSucceeded ? 'success' : (anyFailed ? 'failure' : 'partial'),
       outputs: Object.fromEntries(
         workflow.steps.map(s => [s.id, s.output])
       ),
@@ -407,6 +470,20 @@ export class CounterpointOrchestrator {
         .map(s => s.verificationResult!),
       events: this.events,
     };
+  }
+
+  pauseWorkflow(workflowId: string): void {
+    this.pausedWorkflows.add(workflowId);
+    this.logEvent('workflow_paused', `Flujo pausado: ${workflowId}`, undefined, undefined, { workflowId });
+  }
+
+  resumeWorkflow(workflowId: string): void {
+    this.pausedWorkflows.delete(workflowId);
+    this.logEvent('workflow_resumed', `Flujo reanudado: ${workflowId}`, undefined, undefined, { workflowId });
+  }
+
+  isWorkflowPaused(workflowId: string): boolean {
+    return this.pausedWorkflows.has(workflowId);
   }
 
   cancelWorkflow(workflowId: string): void {
@@ -447,6 +524,20 @@ export class CounterpointOrchestrator {
     const allAgents = Object.values(AGENTS);
 
     return allAgents.filter(a => !activatedAgentIds.has(a.id));
+  }
+
+  getWorkflowEvents(workflowId: string): ExecutionEvent[] {
+    const workflow = this.workflows.get(workflowId);
+    if (!workflow) return [];
+
+    // Filtrar eventos relacionados con este workflow
+    const stepIds = new Set(workflow.steps.map(s => s.id));
+    return this.events.filter(e => {
+      // Incluir eventos sin stepId (como workflow_completed)
+      if (!e.stepId) return true;
+      // Incluir eventos de pasos de este workflow
+      return stepIds.has(e.stepId);
+    });
   }
 }
 

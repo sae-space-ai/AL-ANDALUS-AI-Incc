@@ -1,6 +1,6 @@
 # ESTADO DEL PROYECTO — AL-ANDALUS AI
 
-> Última actualización: FASE 3 — El Contrapunto Vivo de Bach (COMPLETADA).
+> Última actualización: FASE 3.1 — Ensayo General del Contrapunto Vivo (EN PROGRESO).
 > Fecha: 15 de octubre de 2026.
 
 ---
@@ -132,6 +132,37 @@
 - ❌ Type checking: NO EJECUTADO (sin terminal).
 - ❌ Scripts Python: NO EJECUTADOS (sin Python).
 - ❌ Cálculo de SHA-256: NO REALIZADO (sin terminal).
+
+### FASE 3
+- ✅ Motor de orquestación contrapuntística implementado.
+- ✅ 6 agentes especializados (demostración determinista).
+- ✅ Máquina de estados con 9 estados.
+- ✅ Detección de dependencias circulares.
+- ✅ Control de presupuesto y tiempo.
+- ✅ Modo Espejo (verificación inversa).
+- ✅ Modo Cangrejo (trazabilidad retrógrada).
+- ✅ Motivos reutilizables.
+- ✅ Partitura Viva (interfaz visual).
+- ✅ Controles: Iniciar, Pausar, Cancelar, Reiniciar, Exportar.
+- ✅ Exportación de resultados en JSON.
+- ✅ Integración en App.tsx sin romper trabajo existente.
+- ✅ Documentación completa (7 archivos).
+- ✅ Build verificado sin errores.
+- ⚠️ Integración con REA real (pendiente de repositorio).
+- ⚠️ Integración con JOULE real (pendiente de código).
+- ⚠️ Pruebas automatizadas (pendiente de terminal).
+
+### FASE 3.1
+- ✅ Identificados 5 problemas críticos en la implementación de FASE 3.
+- ✅ Corregida pausa/reanudación (ahora funciona realmente en el motor).
+- ✅ Implementada concurrencia real para pasos independientes.
+- ✅ Añadido método getWorkflowEvents para historial consultable.
+- ✅ Panel de historial añadido a la UI de Partitura Viva.
+- ✅ Tipos de evento ampliados (workflow_paused, workflow_resumed).
+- ✅ Build verificado sin errores después de correcciones.
+- ✅ Documentación de ensayo general creada (docs/FASE31_ENSAYO_GENERAL.md).
+- ⚠️ Mesa de Dirección Humana: controles de pausa/reanudación corregidos.
+- ⚠️ Pruebas automatizadas: pendientes de ejecución (sin terminal).
 
 ## ¿Qué está pendiente?
 
